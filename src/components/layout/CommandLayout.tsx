@@ -304,11 +304,11 @@ export const CommandLayout: React.FC<CommandLayoutProps> = ({ children }) => {
           </div>
 
           <div className="flex items-center gap-4 text-slate-400 text-[11px]">
-            <span>FEED: <strong className="text-[#22C55E]">NDMA / SACHET CAP</strong></span>
-            <span>•</span>
             <span>EDGE INFERENCE: <strong className="text-white">ORIN NX 42.4 FPS</strong></span>
             <span>•</span>
             <span>GNSS: <strong className="text-[#35C8FF]">±1.8cm RTK FIX</strong></span>
+            <span>•</span>
+            <span>NETWORK: <strong className="text-[#22C55E]">MIMO MESH 24.8 Mbps</strong></span>
           </div>
         </footer>
       </div>

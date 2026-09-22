@@ -17,7 +17,21 @@ import {
 import { useMission } from '../../context/MissionContext';
 import realDroneImg from '../../assets/real_drone_hardware.jpg';
 
-export const DroneVisual: React.FC = () => {
+export interface DroneVisualProps {
+  compact?: boolean;
+  hideGauges?: boolean;
+  className?: string;
+  headerTitle?: string;
+  badgeText?: string;
+}
+
+export const DroneVisual: React.FC<DroneVisualProps> = ({
+  compact = false,
+  hideGauges = false,
+  className = '',
+  headerTitle = 'DRONE-01 // ANX-SAR-03',
+  badgeText = 'F450 RED/WHITE QUAD',
+}) => {
   const mountRef = useRef<HTMLDivElement>(null);
   const { primaryDrone } = useMission();
   const [viewMode, setViewMode] = useState<'thermal' | 'rgb' | 'lidar'>('thermal');
@@ -421,7 +435,7 @@ export const DroneVisual: React.FC = () => {
   }, [displayMode, isRotating]);
 
   return (
-    <div className="relative rounded-2xl bg-[#0C121B] border border-white/10 shadow-2xl overflow-hidden flex flex-col justify-between">
+    <div className={`relative rounded-2xl bg-[#0C121B] border border-white/10 shadow-2xl overflow-hidden flex flex-col justify-between ${className}`}>
       {/* Background Coordinate Grid */}
       <div className="absolute inset-0 bg-radial from-[#101722]/80 via-[#0C121B] to-[#05080D] pointer-events-none" />
       <div 
@@ -429,14 +443,16 @@ export const DroneVisual: React.FC = () => {
       />
 
       {/* Top Header & Physical Mode Switcher */}
-      <div className="relative z-10 p-3.5 flex flex-wrap items-center justify-between gap-2 text-xs font-mono border-b border-white/10 bg-[#080D14]/90 backdrop-blur-md">
+      <div className={`relative z-10 ${compact ? 'p-2.5' : 'p-3.5'} flex flex-wrap items-center justify-between gap-2 text-xs font-mono border-b border-white/10 bg-[#080D14]/90 backdrop-blur-md`}>
         <div className="flex items-center gap-2">
           <div className="w-2.5 h-2.5 rounded-full bg-[#22C55E] animate-pulse" />
           <div>
-            <span className="font-bold text-white tracking-wide">DRONE-01 // ANX-SAR-03</span>
-            <span className="ml-2 text-[10px] px-1.5 py-0.5 rounded bg-red-500/20 text-[#E53935] font-bold border border-red-500/30">
-              F450 RED/WHITE QUAD
-            </span>
+            <span className="font-bold text-white tracking-wide">{headerTitle}</span>
+            {badgeText && (
+              <span className="ml-2 text-[10px] px-1.5 py-0.5 rounded bg-red-500/20 text-[#E53935] font-bold border border-red-500/30">
+                {badgeText}
+              </span>
+            )}
           </div>
         </div>
 
@@ -486,10 +502,10 @@ export const DroneVisual: React.FC = () => {
       {displayMode === '3d' ? (
         <div 
           ref={mountRef} 
-          className="relative z-10 w-full h-[290px] sm:h-[330px] cursor-grab active:cursor-grabbing"
+          className={`relative z-10 w-full ${compact ? 'h-[210px]' : 'h-[290px] sm:h-[330px]'} cursor-grab active:cursor-grabbing`}
         />
       ) : (
-        <div className="relative z-10 w-full h-[290px] sm:h-[330px] overflow-hidden bg-black flex items-center justify-center group">
+        <div className={`relative z-10 w-full ${compact ? 'h-[210px]' : 'h-[290px] sm:h-[330px]'} overflow-hidden bg-black flex items-center justify-center group`}>
           <img 
             src={realDroneImg} 
             alt="Real AERONEX SAR Drone Hardware" 
@@ -523,69 +539,71 @@ export const DroneVisual: React.FC = () => {
       )}
 
       {/* Sensor Payload Switcher & Diagnostics */}
-      <div className="relative z-10 p-3 bg-[#080D14]/95 border-t border-white/10 flex flex-col gap-2.5 text-xs">
+      <div className={`relative z-10 ${compact ? 'p-2' : 'p-3'} bg-[#080D14]/95 border-t border-white/10 flex flex-col gap-2 text-xs`}>
         {/* Sensor Mode Switcher */}
         <div className="flex items-center justify-between gap-2">
           <div className="flex items-center gap-1 bg-[#101722] p-1 rounded-xl border border-white/10">
             <button
               onClick={() => setViewMode('thermal')}
-              className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-mono font-semibold transition-colors ${
+              className={`flex items-center gap-1.5 px-2 py-0.5 rounded-lg text-xs font-mono font-semibold transition-colors ${
                 viewMode === 'thermal'
                   ? 'bg-[#FF9F1C] text-slate-950 font-bold shadow-sm'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
-              <Flame className="w-3.5 h-3.5" />
-              <span>FLIR Thermal</span>
+              <Flame className="w-3 h-3" />
+              <span>FLIR</span>
             </button>
             <button
               onClick={() => setViewMode('rgb')}
-              className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-mono font-semibold transition-colors ${
+              className={`flex items-center gap-1.5 px-2 py-0.5 rounded-lg text-xs font-mono font-semibold transition-colors ${
                 viewMode === 'rgb'
                   ? 'bg-[#38BDF8] text-slate-950 font-bold shadow-sm'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
-              <Eye className="w-3.5 h-3.5" />
-              <span>4K Optical</span>
+              <Eye className="w-3 h-3" />
+              <span>4K</span>
             </button>
             <button
               onClick={() => setViewMode('lidar')}
-              className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-mono font-semibold transition-colors ${
+              className={`flex items-center gap-1.5 px-2 py-0.5 rounded-lg text-xs font-mono font-semibold transition-colors ${
                 viewMode === 'lidar'
                   ? 'bg-[#22C55E] text-slate-950 font-bold shadow-sm'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
-              <Radar className="w-3.5 h-3.5" />
-              <span>3D LiDAR</span>
+              <Radar className="w-3 h-3" />
+              <span>LiDAR</span>
             </button>
           </div>
 
-          <div className="text-[11px] font-mono text-slate-400">
+          <div className="text-[10px] font-mono text-slate-400">
             FPS: <span className="text-[#22C55E] font-bold">42.4</span> | JETSON ORIN NX
           </div>
         </div>
 
         {/* Live Hardware Telemetry Gauges */}
-        <div className="grid grid-cols-4 gap-2 pt-1 border-t border-white/5 font-mono text-center text-[11px]">
-          <div className="bg-[#101722] p-1.5 rounded border border-white/5">
-            <span className="text-slate-400 block text-[10px]">ALTITUDE</span>
-            <span className="text-[#38BDF8] font-bold">124m AGL</span>
+        {!hideGauges && (
+          <div className="grid grid-cols-4 gap-2 pt-1 border-t border-white/5 font-mono text-center text-[11px]">
+            <div className="bg-[#101722] p-1.5 rounded border border-white/5">
+              <span className="text-slate-400 block text-[10px]">ALTITUDE</span>
+              <span className="text-[#38BDF8] font-bold">124m AGL</span>
+            </div>
+            <div className="bg-[#101722] p-1.5 rounded border border-white/5">
+              <span className="text-slate-400 block text-[10px]">SPEED</span>
+              <span className="text-white font-bold">42.0 km/h</span>
+            </div>
+            <div className="bg-[#101722] p-1.5 rounded border border-white/5">
+              <span className="text-slate-400 block text-[10px]">RTK GNSS</span>
+              <span className="text-[#22C55E] font-bold">±1.8cm</span>
+            </div>
+            <div className="bg-[#101722] p-1.5 rounded border border-white/5">
+              <span className="text-slate-400 block text-[10px]">BATTERY</span>
+              <span className="text-[#22C55E] font-bold">78% (34m)</span>
+            </div>
           </div>
-          <div className="bg-[#101722] p-1.5 rounded border border-white/5">
-            <span className="text-slate-400 block text-[10px]">SPEED</span>
-            <span className="text-white font-bold">42.0 km/h</span>
-          </div>
-          <div className="bg-[#101722] p-1.5 rounded border border-white/5">
-            <span className="text-slate-400 block text-[10px]">RTK GNSS</span>
-            <span className="text-[#22C55E] font-bold">±1.8cm</span>
-          </div>
-          <div className="bg-[#101722] p-1.5 rounded border border-white/5">
-            <span className="text-slate-400 block text-[10px]">BATTERY</span>
-            <span className="text-[#22C55E] font-bold">78% (34m)</span>
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );
