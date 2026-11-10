@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 240" width="100%" height="100%">
+  <defs>
+    <linearGradient id="axBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#030712" />
+      <stop offset="50%" stop-color="#081426" />
+      <stop offset="100%" stop-color="#050d1a" />
+    </linearGradient>
+    <filter id="axGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <pattern id="axGrid" width="25" height="25" patternUnits="userSpaceOnUse">
+      <path d="M 25 0 L 0 0 0 25" fill="none" stroke="#00f3ff" stroke-width="0.5" stroke-opacity="0.07" />
+    </pattern>
+    <linearGradient id="axGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00f3ff" />
+      <stop offset="50%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#10b981" />
+    </linearGradient>
+  </defs>
+
+  <style>
+    .mono { font-family: 'JetBrains Mono', monospace, 'Courier New'; }
+    .sans { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; }
+  </style>
+
+  <rect width="900" height="240" fill="url(#axBg)" rx="10" />
+  <rect width="900" height="240" fill="url(#axGrid)" rx="10" />
+  <rect x="10" y="10" width="880" height="220" fill="none" stroke="#0f314d" stroke-width="1.2" rx="8" />
+
+  <!-- Corner Brackets -->
+  <path d="M 10 32 L 10 10 L 32 10" fill="none" stroke="#00f3ff" stroke-width="2.5" />
+  <path d="M 868 10 L 890 10 L 890 32" fill="none" stroke="#00f3ff" stroke-width="2.5" />
+  <path d="M 10 208 L 10 230 L 32 230" fill="none" stroke="#00f3ff" stroke-width="2.5" />
+  <path d="M 868 230 L 890 230 L 890 208" fill="none" stroke="#00f3ff" stroke-width="2.5" />
+
+  <!-- Top System Header -->
+  <rect x="25" y="20" width="850" height="24" fill="#0b1e36" rx="4" stroke="#14426d" stroke-width="0.8" />
+  <circle cx="38" cy="32" r="3.5" fill="#10b981" />
+  <text x="50" y="36" fill="#38bdf8" class="mono" font-size="10.5" font-weight="600">AERONEX // AUTONOMOUS EMERGENCY RESPONSE &amp; RESCUE INTELLIGENCE CENTER</text>
+  <rect x="750" y="24" width="110" height="16" fill="#00f3ff" fill-opacity="0.15" rx="3" stroke="#00f3ff" stroke-width="0.8" />
+  <text x="760" y="36" fill="#00f3ff" class="mono" font-size="9" font-weight="700">FLEET ONLINE</text>
+
+  <!-- Title & Subtitle -->
+  <text x="45" y="96" fill="url(#axGrad)" class="sans" font-size="38" font-weight="900" letter-spacing="3" filter="url(#axGlow)">AERONEX COMMAND</text>
+  <text x="45" y="96" fill="#ffffff" class="sans" font-size="38" font-weight="900" letter-spacing="3">AERONEX COMMAND</text>
+  
+  <text x="47" y="124" fill="#7dd3fc" class="mono" font-size="11.5" font-weight="600" letter-spacing="1.2">
+    AUTONOMOUS DRONE SEARCH &amp; RESCUE • AI SURVIVOR VERIFICATION • TACTICAL MAPLIBRE &amp; THREE.JS
+  </text>
+
+  <line x1="45" y1="138" x2="680" y2="138" stroke="url(#axGrad)" stroke-width="1.2" />
+
+  <!-- Telemetry Pills -->
+  <g transform="translate(45, 155)">
+    <rect x="0" y="0" width="170" height="22" fill="#0a233f" rx="3" stroke="#00f3ff" stroke-width="0.8" />
+    <text x="10" y="15" fill="#e2e8f0" class="mono" font-size="10">UAV FLEET TELEMETRY</text>
+
+    <rect x="180" y="0" width="180" height="22" fill="#0a233f" rx="3" stroke="#10b981" stroke-width="0.8" />
+    <text x="190" y="15" fill="#e2e8f0" class="mono" font-size="10">SURVIVOR CONFIDENCE AI</text>
+
+    <rect x="370" y="0" width="165" height="22" fill="#0a233f" rx="3" stroke="#38bdf8" stroke-width="0.8" />
+    <text x="380" y="15" fill="#e2e8f0" class="mono" font-size="10">DYNAMIC REROUTING</text>
+  </g>
+
+  <!-- Status Log -->
+  <text x="45" y="208" fill="#94a3b8" class="mono" font-size="11">
+    <tspan fill="#10b981" font-weight="700">MISSION PROTOCOLS:</tspan> Multi-Drone Waypoint Sync • Thermal/RGB Computer Vision • Disaster Zone Grid
+  </text>
+
+  <!-- Right Visual Widget: Drone Tactical Vector -->
+  <g transform="translate(760, 115)">
+    <!-- Drone Quadcopter Geometry -->
+    <line x1="25" y1="25" x2="75" y2="75" stroke="#00f3ff" stroke-width="2" />
+    <line x1="25" y1="75" x2="75" y2="25" stroke="#00f3ff" stroke-width="2" />
+    <circle cx="50" cy="50" r="12" fill="#0c2340" stroke="#10b981" stroke-width="2" />
+    <circle cx="25" cy="25" r="9" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="2,2" />
+    <circle cx="75" cy="25" r="9" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="2,2" />
+    <circle cx="25" cy="75" r="9" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="2,2" />
+    <circle cx="75" cy="75" r="9" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="2,2" />
+    <circle cx="50" cy="50" r="4" fill="#00f3ff" filter="url(#axGlow)" />
+  </g>
+</svg>
